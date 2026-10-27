@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "omio": {
+      "command": "/path/to/omio-api-mcp-server/.venv/bin/omio-mcp",
+      "args": ["mcp"]
+    }
+  }
+}
