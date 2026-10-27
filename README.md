@@ -19,11 +19,10 @@ It is for technical people who want to run it themselves, **for noncommercial us
 [![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial-141318)](https://github.com/cotletdev/omio-api-mcp-server/blob/main/LICENSE)
 
 ```bash
-git clone https://github.com/cotletdev/omio-api-mcp-server.git && cd omio-api-mcp-server
-python3 -m venv .venv && . .venv/bin/activate && pip install -e .
+uv tool install omio-api-mcp                  # or: pip install omio-api-mcp
 omio-mcp connect                                   # reads your Omio session from Chrome
 omio-mcp call search_trips from=Berlin to=Munich date=2026-11-19 limit=5
-claude mcp add omio -- "$PWD/.venv/bin/omio-mcp" mcp
+claude mcp add omio -- uvx omio-api-mcp mcp
 ```
 
 ## Contents
@@ -68,6 +67,17 @@ Omio's sign-in cookie lasts about a year. When Omio signs you out, the server re
 
 ## Install
 
+From [PyPI](https://pypi.org/project/omio-api-mcp/):
+
+```bash
+uv tool install omio-api-mcp       # or: pipx install omio-api-mcp, or: pip install omio-api-mcp
+omio-mcp --version
+```
+
+MCP clients can also run it with no install: `uvx omio-api-mcp mcp`.
+
+From source:
+
 ```bash
 git clone https://github.com/cotletdev/omio-api-mcp-server.git
 cd omio-api-mcp-server
@@ -81,7 +91,7 @@ With [uv](https://docs.astral.sh/uv/): `uv venv && uv pip install -e .`, then `u
 
 Setting it up with an AI agent (Claude Code, Codex, Cursor)? Open it in this folder and ask it to set up the repo: [`AGENTS.md`](https://github.com/cotletdev/omio-api-mcp-server/blob/main/AGENTS.md) tells it every step, and it asks you only for the steps in Chrome.
 
-To update: `git pull && pip install -e .`. We copy every change of the hosted Omio tools into this repo.
+To update: `uv tool upgrade omio-api-mcp` (or `pip install -U omio-api-mcp`), from source `git pull && pip install -e .`. We copy every change of the hosted Omio tools into this repo.
 
 ## Connect your Chrome
 
@@ -148,9 +158,9 @@ The MCP server lists every tool with its input schema, a description written for
 ### Claude Code
 
 ```bash
-claude mcp add omio -- /path/to/omio-api-mcp-server/.venv/bin/omio-mcp mcp
+claude mcp add omio -- uvx omio-api-mcp mcp
 # read only:
-claude mcp add omio -- /path/to/omio-api-mcp-server/.venv/bin/omio-mcp mcp --read-only
+claude mcp add omio -- uvx omio-api-mcp mcp --read-only
 ```
 
 ### Claude Desktop
@@ -161,8 +171,8 @@ claude mcp add omio -- /path/to/omio-api-mcp-server/.venv/bin/omio-mcp mcp --rea
 {
   "mcpServers": {
     "omio": {
-      "command": "/path/to/omio-api-mcp-server/.venv/bin/omio-mcp",
-      "args": ["mcp"]
+      "command": "uvx",
+      "args": ["omio-api-mcp", "mcp"]
     }
   }
 }
@@ -178,8 +188,8 @@ claude mcp add omio -- /path/to/omio-api-mcp-server/.venv/bin/omio-mcp mcp --rea
 
 ```toml
 [mcp_servers.omio]
-command = "/path/to/omio-api-mcp-server/.venv/bin/omio-mcp"
-args = ["mcp"]
+command = "uvx"
+args = ["omio-api-mcp", "mcp"]
 ```
 
 ### Over HTTP
