@@ -1,8 +1,36 @@
-# Omio API and MCP server, self-hosted
+# Omio API and MCP server: connect Omio to ChatGPT and Claude
 
 <!-- mcp-name: dev.cotlet/omio -->
 
-An **Omio API** and an **Omio MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. All 16 Omio tools we run in production at [Cotlet](https://cotlet.dev/integrations/omio-api-mcp-server): places, train, bus, flight and ferry search, the cheapest day of a route, fares with their refund and exchange conditions, round trips, a booking up to the checkout link, Your Bookings and saved travelers.
+**Yes, ChatGPT, Claude and other AI agents can work in your Omio account.** That includes Cursor, Codex, OpenClaw and any MCP client, plus automations in n8n, Make and Zapier. Ask in plain words, and the AI searches trains, buses and flights, compares fares and conditions, reads your bookings and saved travellers and prepares the checkout. It shows you what it will do first and sends nothing to other people until you say so.
+
+This repo is the missing piece: 16 Omio tools for AI assistants and scripts.
+
+## What you can ask
+
+> *Compare train, bus and flight from Berlin to Munich next Thursday by price and travel time.*
+>
+> *Which day in the next three weeks is cheapest from Berlin to Munich, and what is the cheapest train that day?*
+>
+> *Price a round trip Berlin to Munich, out on Friday morning and back on Sunday evening, with my BahnCard 50.*
+>
+> *Reserve the cheapest refundable train from Berlin to Munich next Thursday for me and my saved companion, and send me the total and the checkout link.*
+
+## Two ways to get it
+
+| | [Ready to use, at Cotlet](https://cotlet.dev/integrations/omio-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=omio&utm_content=two-ways) | Run it yourself, this repo |
+|---|---|---|
+| For | travellers, assistants and travel teams | developers |
+| Setup | sign in to Omio once, about 5 minutes, nothing to install | Python and a terminal |
+| Works in | ChatGPT and Claude apps, on your phone too, Cursor, Codex, OpenClaw, any MCP client, n8n, Make, Zapier, REST API | Claude Code, Claude Desktop, Cursor, Codex on your computer |
+| Runs | 24/7, your computer can be off | while your computer is on |
+| Price | 7 days free, no card | free |
+
+**[Start free at cotlet.dev →](https://cotlet.dev/signup?app=omio&utm_source=github&utm_medium=readme&utm_campaign=omio&utm_content=top-button)**
+
+## Run it yourself
+
+An **Omio API** and an **Omio MCP server** you run on your own computer, in Python, on the session of your own Google Chrome. All 16 Omio tools we run in production at [Cotlet](https://cotlet.dev/integrations/omio-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=omio&utm_content=intro): places, train, bus, flight and ferry search, the cheapest day of a route, fares with their refund and exchange conditions, round trips, a booking up to the checkout link, Your Bookings and saved travelers.
 
 Omio has no public API for your own account. Its Search API sits in the affiliate programme, for partners, and Your Bookings, saved travelers and checkout exist only on omio.com and in the Omio app. This repo gives you:
 
@@ -12,11 +40,11 @@ Omio has no public API for your own account. Its Search API sits in the affiliat
 
 Nothing here pays. `start_booking` reserves the fare and returns a `checkout_url`, and you pay on omio.com yourself.
 
-It is for technical people who want to run it themselves, **for noncommercial use only** ([license](#license)). If you want it running 24/7 on a server, kept working when Omio changes its site, for a team or a business, use the [hosted version at cotlet.dev](https://cotlet.dev/integrations/omio-api-mcp-server).
+Free for your own use, your own business included ([license](#license)).
 
 [![Omio MCP server](https://img.shields.io/badge/Omio%20MCP-16%20tools-6d4aef)](#all-16-tools)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-141318)](#requirements)
-[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial-141318)](https://github.com/cotletdev/omio-api-mcp-server/blob/main/LICENSE)
+[![License: Elastic 2.0](https://img.shields.io/badge/license-Elastic%202.0-141318)](https://github.com/cotletdev/omio-api-mcp-server/blob/main/LICENSE)
 
 ```bash
 uv tool install omio-api-mcp                  # or: pip install omio-api-mcp
@@ -27,6 +55,7 @@ claude mcp add omio -- uvx omio-api-mcp mcp
 
 ## Contents
 
+- [Questions from Omio users](#questions-from-omio-users)
 - [How it works](#how-it-works)
 - [Requirements](#requirements)
 - [Install](#install)
@@ -41,6 +70,44 @@ claude mcp add omio -- uvx omio-api-mcp mcp
 - [Self-hosted or hosted](#self-hosted-or-hosted)
 - [FAQ](#faq)
 - [License](#license)
+
+## Questions from Omio users
+
+**Does Omio have an API?**
+Not for your own account. Omio's affiliate programme lists a Search API for partners, and its app in ChatGPT searches trips. Your Bookings, saved travelers, fare conditions and checkout work only on omio.com and in the Omio app. This repo and [Cotlet](https://cotlet.dev/integrations/omio-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=omio&utm_content=faq-api) give you 16 Omio tools as a REST API and an MCP server.
+
+**Can I get a Omio API key?**
+Not from Omio for your own account. With Cotlet you get your own API key that works with your Omio account, for scripts, n8n, Make, Zapier or any HTTP client. This repo needs no key: it runs on your computer, on your own Omio session.
+
+**Is there an official ChatGPT integration for Omio?**
+Omio has a ChatGPT app that searches trips. It does not see your account. Cotlet connects your own Omio account to ChatGPT, Claude and other AI agents: your bookings, saved travellers and fare conditions.
+
+**How do I connect Omio to ChatGPT?**
+Sign up at [cotlet.dev](https://cotlet.dev/signup?app=omio&utm_source=github&utm_medium=readme&utm_campaign=omio&utm_content=faq-chatgpt), sign in to Omio once in your Cloud Browser there, and add Cotlet to ChatGPT, following the steps in your account. Then ask ChatGPT about your Omio like you would ask an assistant. ChatGPT needs a server on the internet, so this repo alone, running on your computer, does not connect to ChatGPT.
+
+**Can ChatGPT book Omio train tickets for me?**
+Yes, with Cotlet, up to the payment. It searches and compares trips, checks fare conditions, fills in your saved travellers and stops at checkout, so you pay yourself.
+
+**Can AI see my Omio bookings?**
+Yes, with Cotlet: upcoming and past bookings, tickets and their conditions, in plain words.
+
+**Can I automate Omio with Zapier, Make or n8n?**
+Omio has no Zapier or Make app. With Cotlet, n8n, Make and Zapier can search trips and read your bookings.
+
+**Can I use it from my phone?**
+Yes, with Cotlet: once it is set up, the ChatGPT and Claude apps on your phone can use Omio for you.
+
+**Do I need to be technical?**
+For Cotlet, no: you sign in to Omio and add Cotlet to ChatGPT or Claude, with step-by-step instructions in your account. This repo is for people who are fine with Python and a terminal.
+
+**Is my Omio account safe?**
+Yes. Neither Cotlet nor this repo sees or stores your Omio password. You sign in yourself, the way you always do, and the AI works on that signed-in session. Anything that reaches other people asks for your OK first: in Cotlet by default, here through your MCP client.
+
+**Is it free?**
+This repo is free, also in your own business. Cotlet is free for 7 days with no card, then one-time credit packs from $29, no subscription. [Pricing](https://cotlet.dev/pricing?utm_source=github&utm_medium=readme&utm_campaign=omio&utm_content=faq-price).
+
+**I manage Omio for several accounts or clients. Does that work?**
+Yes, with Cotlet. Each Omio login gets its own connection. Write to [contact@cotlet.dev](mailto:contact@cotlet.dev) and tell us how many accounts you manage.
 
 ## How it works
 
@@ -352,7 +419,7 @@ The REST API answers `{"error": "<code>", "message": "..."}`. The MCP server ret
 
 ## Self-hosted or hosted
 
-| | This repo | [Cotlet, hosted](https://cotlet.dev/integrations/omio-api-mcp-server) |
+| | This repo | [Cotlet, hosted](https://cotlet.dev/integrations/omio-api-mcp-server?utm_source=github&utm_medium=readme&utm_campaign=omio&utm_content=compare) |
 |---|---|---|
 | Tools | the same 16 | the same 16 |
 | Runs | on your computer, while it is on | in the cloud, 24/7 |
@@ -361,15 +428,12 @@ The REST API answers `{"error": "<code>", "message": "..."}`. The MCP server ret
 | When Omio changes its site | `git pull` once we have fixed it | fixed for you, every tool tested daily |
 | Approvals | your MCP client asks per call | writes wait for your OK, switchable per tool |
 | Works with | MCP clients on your machine, local scripts | Claude.ai and ChatGPT connectors, n8n, Make, Zapier, any HTTP client |
-| Who may use it | you, for noncommercial use | teams, businesses, agencies |
+| Who may use it | you and your own business | you, teams, businesses, agencies |
 | Price | free | free 7-day trial with 2,000 credits, no card; then one-time packs from $29 for 5,000 credits |
 
 On the hosted version a successful call uses 10 credits, failed calls are free, and the Cloud Browser uses 50 credits a day while it has an app enabled for agents. [Full pricing](https://cotlet.dev/pricing).
 
 ## FAQ
-
-**Does Omio have an API?**
-Not for your own account. Omio's affiliate programme lists a Search API for partners, and its app in ChatGPT searches trips. Your Bookings, saved travelers, fare conditions and checkout work only on omio.com and in the Omio app. Details: [cotlet.dev/integrations/omio-api-mcp-server](https://cotlet.dev/integrations/omio-api-mcp-server).
 
 **Is there an Omio MCP server for Claude, ChatGPT or Cursor?**
 Yes, this one runs on your machine: `omio-mcp mcp` for Claude Code, Claude Desktop, Cursor and Codex. ChatGPT and Claude.ai connectors need a public HTTPS URL, which the [hosted Omio MCP server](https://cotlet.dev/integrations/omio-api-mcp-server) gives you.
@@ -393,20 +457,20 @@ Calls fail with `auth_expired`. With Chrome remote debugging on, the server read
 Not well. Cloudflare checks requests to www.omio.com, and a datacenter IP without a browser gets a bot check. For an always-on setup the hosted version keeps your session in your own Cloud Browser, which passes those checks.
 
 **Can I use it at work or for my clients?**
-No, the license allows noncommercial use only. Booking travel for a company or for clients is commercial use. Use [Cotlet](https://cotlet.dev) or write to [contact@cotlet.dev](mailto:contact@cotlet.dev).
+At work and in your own business, yes, free. You may not offer it to others as a hosted or managed service. For client work, use [Cotlet](https://cotlet.dev?utm_source=github&utm_medium=readme&utm_campaign=omio&utm_content=faq-clients) or write to [contact@cotlet.dev](mailto:contact@cotlet.dev).
 
 **Is it open source?**
-The source is public, the license is not an open source license: noncommercial use only, no business use.
+The source is public under the Elastic License 2.0: free to use and change, also in your own business, but not to resell as a hosted service.
 
 **A tool broke or I need another one.**
 [Open an issue](https://github.com/cotletdev/omio-api-mcp-server/issues) with the tool name and the error message.
 
 ## License
 
-[PolyForm Noncommercial License 1.0.0](https://github.com/cotletdev/omio-api-mcp-server/blob/main/LICENSE). In short:
+[Elastic License 2.0](https://github.com/cotletdev/omio-api-mcp-server/blob/main/LICENSE). In short:
 
-- **Allowed:** noncommercial use: you, for your own personal purposes with your own Omio account, or a charity, school, public research or government body. Changing the code, and sharing it under the same license.
-- **Not allowed:** any commercial use, your own business included; client work; selling or offering it, or a service built on it.
+- **Allowed:** using it for yourself and in your own business, free. Changing the code and sharing it under the same license.
+- **Not allowed:** offering it to others as a hosted or managed service, removing the license notices, getting around its limits.
 
 ---
 
@@ -419,4 +483,4 @@ The source is public, the license is not an open source license: noncommercial u
   </a>
 </p>
 
-Maintained by [Cotlet](https://cotlet.dev) ([@cotletdev](https://x.com/cotletdev)). Omio is a trademark of its owner. This project is unofficial and not affiliated with, endorsed or sponsored by Omio.
+Maintained by [Cotlet](https://cotlet.dev?utm_source=github&utm_medium=readme&utm_campaign=omio&utm_content=footer) ([@cotletdev](https://x.com/cotletdev)). Omio is a trademark of its owner. This project is unofficial and not affiliated with, endorsed or sponsored by Omio.
